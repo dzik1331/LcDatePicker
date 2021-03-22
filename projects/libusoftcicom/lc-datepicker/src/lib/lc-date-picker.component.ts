@@ -11,9 +11,9 @@ import {
   OnChanges,
   OnDestroy
 } from '@angular/core';
-import { DatePickerConfig, ECalendarType, ECalendarNavigation } from './lc-date-picker-config-helper';
+import {DatePickerConfig, ECalendarType, ECalendarNavigation} from './lc-date-picker-config-helper';
 import moment from 'moment';
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 
 export enum panels {
   Time,
@@ -93,6 +93,7 @@ export class LCDatePickerComponent implements OnInit, OnChanges, OnDestroy {
   @Output() openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() config: DatePickerConfig;
   @Input() date: moment.Moment;
+  @Input() appendById: string;
   @Output() dateChange: EventEmitter<string> = new EventEmitter<string>();
 
   private subscriptions: Array<Subscription> = [];
@@ -141,10 +142,17 @@ export class LCDatePickerComponent implements OnInit, OnChanges, OnDestroy {
     if (changes.opened && changes.opened.currentValue === true) {
       const windowHeight = window.innerHeight;
       const componentPosition = this._elementRef.nativeElement.parentNode.getBoundingClientRect();
+      let scroll = 0;
+      if (this.appendById != null) {
+        const appendObj = document.getElementById(this.appendById);
+        if (appendObj) {
+          scroll = appendObj.scrollTop;
+        }
+      }
       if (windowHeight - componentPosition.top > this.calendarSize(this.config.CalendarType)) {
-        this.componentMargin = 0;
+        this.componentMargin = 0 + (scroll * -1) + 'px';
       } else {
-        this.componentMargin = this.calendarSize(this.config.CalendarType) * -1 + 'px';
+        this.componentMargin = (this.calendarSize(this.config.CalendarType) + scroll) * -1 + 'px';
       }
       this.initCalendar();
       this.cd.markForCheck();
