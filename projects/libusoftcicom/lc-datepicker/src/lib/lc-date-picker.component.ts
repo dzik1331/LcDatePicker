@@ -1,18 +1,18 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
   ChangeDetectionStrategy,
-  HostBinding,
+  ChangeDetectorRef,
+  Component,
   ElementRef,
-  OnInit,
+  EventEmitter,
+  HostBinding,
+  Input,
   OnChanges,
-  OnDestroy
+  OnDestroy,
+  OnInit,
+  Output
 } from '@angular/core';
-import {DatePickerConfig, ECalendarType, ECalendarNavigation} from './lc-date-picker-config-helper';
-import moment from 'moment';
+import {DatePickerConfig, ECalendarNavigation, ECalendarType} from './lc-date-picker-config-helper';
+import * as moment from 'moment';
 import {Subscription} from 'rxjs';
 
 export enum panels {
@@ -52,6 +52,15 @@ export enum panels {
         (switchPannel)="onSwitchPannel($event)"
       ></lc-day-picker>
 
+      <lc-day-picker
+        *ngSwitchCase="6"
+        [newDate]="newDate"
+        (selected)="onDaySelected($event)"
+        (reset)="onResetDate()"
+        [config]="config"
+        (switchPannel)="onSwitchPannel($event)"
+      ></lc-day-picker>
+
       <lc-time-picker
         *ngSwitchCase="0"
         [config]="config"
@@ -68,7 +77,15 @@ export enum panels {
         ></lc-time-picker-compact>
       </div>
 
-      <div class="confirmDate" *ngIf="config.CalendarType <= 1" [style.background]="config.PrimaryColor">
+      <div class="dateTimeToggle" *ngIf="config.CalendarType === 6">
+        <lc-time-picker-seconds-compact
+          [config]="config"
+          (selected)="onTimeSelected($event)"
+          [newDate]="newDate"
+        ></lc-time-picker-seconds-compact>
+      </div>
+
+      <div class="confirmDate" *ngIf="config.CalendarType <= 1 || config.CalendarType == 6" [style.background]="config.PrimaryColor">
         <button (click)="confirm()">{{ config.ConfirmLabel }}</button>
       </div>
     </div>
@@ -174,6 +191,10 @@ export class LCDatePickerComponent implements OnInit, OnChanges, OnDestroy {
         this.activePanel = panels.Day;
         break;
       }
+      case ECalendarType.DateTimeSeconds: {
+        this.activePanel = panels.Day;
+        break;
+      }
       case ECalendarType.Date: {
         this.activePanel = panels.Day;
         break;
@@ -204,7 +225,7 @@ export class LCDatePickerComponent implements OnInit, OnChanges, OnDestroy {
 
   onDaySelected(date: moment.Moment) {
     this.newDate = date;
-    if (this.config.CalendarType > 1) {
+    if (this.config.CalendarType > 1 && this.config.CalendarType !== ECalendarType.DateTimeSeconds) {
       this.dateChange.emit(this.newDate.toISOString());
       this.config.focus();
     }

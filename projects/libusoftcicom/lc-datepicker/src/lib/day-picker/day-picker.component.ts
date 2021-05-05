@@ -13,15 +13,9 @@ import {
   ElementRef
 } from '@angular/core';
 import { DatePickerConfig, ECalendarNavigation } from './../lc-date-picker-config-helper';
-import moment from 'moment';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
-
-export enum Panels {
-  Time,
-  Day,
-  Month,
-  Year
-}
+import {Panels} from './../month-picker/month-picker.component';
 
 export interface IDateObject {
   milliseconds: number;

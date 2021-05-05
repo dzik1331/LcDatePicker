@@ -1,5 +1,5 @@
-import moment from 'moment';
-import { Subject, Observable } from 'rxjs';
+import * as moment from 'moment';
+import {Subject, Observable} from 'rxjs';
 
 export enum ECalendarType {
   Time,
@@ -7,7 +7,8 @@ export enum ECalendarType {
   Date,
   MonthYear,
   Year,
-  DateRange
+  DateRange,
+  DateTimeSeconds
 }
 
 export interface IDate {

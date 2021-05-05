@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { DatePickerConfig } from './../lc-date-picker-config-helper';
-import moment from 'moment';
+import * as moment from 'moment';
 
 
 

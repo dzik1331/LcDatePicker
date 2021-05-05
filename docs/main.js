@@ -295,6 +295,247 @@ var environment = {
 
 /***/ }),
 
+/***/ "B8Ml":
+/*!***************************************************************************************************************************!*\
+  !*** ./projects/libusoftcicom/lc-datepicker/src/lib/time-picker-seconds-compact/time-picker-seconds-compact.component.ts ***!
+  \***************************************************************************************************************************/
+/*! exports provided: LCTimePickerSecondsCompactComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LCTimePickerSecondsCompactComponent", function() { return LCTimePickerSecondsCompactComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+var LCTimePickerSecondsCompactComponent = /** @class */ (function () {
+    function LCTimePickerSecondsCompactComponent(cd) {
+        this.cd = cd;
+        this.selected = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    LCTimePickerSecondsCompactComponent.prototype.ngOnInit = function () {
+        this.setTimeFormat();
+        this.updateTime(false);
+    };
+    LCTimePickerSecondsCompactComponent.prototype.setTimeFormat = function () {
+        this.is24HourFormat = this.newDate.format('LT').indexOf('M') === -1;
+    };
+    LCTimePickerSecondsCompactComponent.prototype.addHour = function () {
+        var hour = this.newDate.hour();
+        this.newDate.hour(++hour % 24);
+        this.updateTime(false);
+    };
+    LCTimePickerSecondsCompactComponent.prototype.subtractHour = function () {
+        var hour = this.newDate.hour();
+        this.newDate.hour((--hour + 24) % 24);
+        this.updateTime(true);
+    };
+    LCTimePickerSecondsCompactComponent.prototype.addMinute = function () {
+        var minute = this.newDate.minutes();
+        this.newDate.minute(++minute % 60);
+        this.updateTime(false);
+    };
+    LCTimePickerSecondsCompactComponent.prototype.subtractMinute = function () {
+        var minute = this.newDate.minute();
+        this.newDate.minute((--minute + 60) % 60);
+        this.updateTime(true);
+    };
+    LCTimePickerSecondsCompactComponent.prototype.addSecond = function () {
+        var second = this.newDate.seconds();
+        this.newDate.second(++second % 60);
+        this.updateTime(false);
+    };
+    LCTimePickerSecondsCompactComponent.prototype.subtractSeconds = function () {
+        var second = this.newDate.second();
+        this.newDate.second((--second + 60) % 60);
+        this.updateTime(true);
+    };
+    LCTimePickerSecondsCompactComponent.prototype.hourScroll = function (event) {
+        this.preventDefault(event);
+        this.stopPropagation(event);
+        if (event.deltaY < 0) {
+            this.addHour();
+        }
+        if (event.deltaY > 0) {
+            this.subtractHour();
+        }
+    };
+    LCTimePickerSecondsCompactComponent.prototype.minuteScroll = function (event) {
+        this.preventDefault(event);
+        this.stopPropagation(event);
+        if (event.deltaY < 0) {
+            this.addMinute();
+        }
+        if (event.deltaY > 0) {
+            this.subtractMinute();
+        }
+    };
+    LCTimePickerSecondsCompactComponent.prototype.secondScroll = function (event) {
+        this.preventDefault(event);
+        this.stopPropagation(event);
+        if (event.deltaY < 0) {
+            this.addSecond();
+        }
+        if (event.deltaY > 0) {
+            this.subtractSeconds();
+        }
+    };
+    LCTimePickerSecondsCompactComponent.prototype.toggleMeridiem = function () {
+        this.newDate.hour((this.newDate.hour() + 12) % 24);
+        this.selected.emit(this.newDate);
+        this.cd.detectChanges();
+    };
+    LCTimePickerSecondsCompactComponent.prototype.updateTime = function (reverse) {
+        var updatedTime = false;
+        // this.config.DisabledTimeRanges.forEach(timerange => {
+        //   console.debug("tim", timerange);
+        //   let currentTime = moment({
+        //     h: this.newDate.hour(),
+        //     m: this.newDate.minutes(),
+        //     s: this.newDate.seconds()
+        //   });
+        //
+        //   let minimumTime = moment({
+        //     h: timerange.startTime.hour,
+        //     m: timerange.startTime.minute,
+        //     s: timerange.startTime.second
+        //   })
+        //
+        //   let maximumTime = moment({
+        //     h: timerange.stopTime.hour,
+        //     m: timerange.stopTime.minute,
+        //     s: timerange.stopTime.second
+        //   })
+        //
+        //   console.debug("min", minimumTime);
+        //   console.debug("max", maximumTime);
+        //   console.debug("currentTime.isBetween(minimumTime, maximumTime, 'minute', '[]')", currentTime.isBetween(minimumTime, maximumTime, 'second', '[]'));
+        //
+        //   if (currentTime.isBetween(minimumTime, maximumTime, 'second', '[]')) {
+        //
+        //     if (reverse) {
+        //       this.newDate.hour(minimumTime.hour())
+        //       this.newDate.minutes(minimumTime.minutes())
+        //       this.newDate.seconds(minimumTime.seconds())
+        //       this.newDate.subtract(1, 's');
+        //     } else {
+        //       this.newDate.hour(maximumTime.hour())
+        //       this.newDate.minutes(maximumTime.minutes())
+        //       this.newDate.minutes(maximumTime.seconds())
+        //       this.newDate.add(1, 's');
+        //     }
+        //     updatedTime = true;
+        //     return;
+        //   }
+        // })
+        if (updatedTime) {
+            this.updateTime(reverse);
+            return;
+        }
+        this.selected.emit(this.newDate);
+    };
+    LCTimePickerSecondsCompactComponent.prototype.preventDefault = function (e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        e.returnValue = false;
+    };
+    LCTimePickerSecondsCompactComponent.prototype.stopPropagation = function (e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        e.cancelBubble = true;
+    };
+    LCTimePickerSecondsCompactComponent.ɵfac = function LCTimePickerSecondsCompactComponent_Factory(t) { return new (t || LCTimePickerSecondsCompactComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"])); };
+    LCTimePickerSecondsCompactComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LCTimePickerSecondsCompactComponent, selectors: [["lc-time-picker-seconds-compact"]], inputs: { newDate: "newDate", config: "config" }, outputs: { selected: "selected" }, decls: 27, vars: 25, consts: [[1, "timePicker"], ["align", "center"], ["rowspan", "2", 1, "clockCell"], ["aria-hidden", "true", 1, "fa", "fa-clock-o", "fa-2x"], ["rowspan", "2", 1, "timeLabel", 3, "wheel"], [1, "selectbtn", 3, "click", "wheel"], ["aria-hidden", "true", 1, "fa", "fa-caret-up", "fa-2x"], ["rowspan", "2", 1, "divider"], ["rowspan", "2"], ["aria-hidden", "true", 1, "fa", "fa-caret-down", "fa-2x"]], template: function LCTimePickerSecondsCompactComponent_Template(rf, ctx) { if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "table", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "tbody", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "tr");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "td", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "i", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "td", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_5_listener($event) { return ctx.hourScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "td", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCTimePickerSecondsCompactComponent_Template_td_click_7_listener() { return ctx.addHour(); })("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_7_listener($event) { return ctx.hourScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "i", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "td", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, ":");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "td", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_11_listener($event) { return ctx.minuteScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "td", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCTimePickerSecondsCompactComponent_Template_td_click_13_listener() { return ctx.addMinute(); })("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_13_listener($event) { return ctx.minuteScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](14, "i", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "td", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_15_listener($event) { return ctx.secondScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](16);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "td", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCTimePickerSecondsCompactComponent_Template_td_click_17_listener() { return ctx.addSecond(); })("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_17_listener($event) { return ctx.secondScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](18, "i", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](19, "td", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "tr");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "td", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCTimePickerSecondsCompactComponent_Template_td_click_21_listener() { return ctx.subtractHour(); })("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_21_listener($event) { return ctx.hourScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "i", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "td", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCTimePickerSecondsCompactComponent_Template_td_click_23_listener() { return ctx.subtractMinute(); })("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_23_listener($event) { return ctx.minuteScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](24, "i", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "td", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCTimePickerSecondsCompactComponent_Template_td_click_25_listener() { return ctx.subtractSeconds(); })("wheel", function LCTimePickerSecondsCompactComponent_Template_td_wheel_25_listener($event) { return ctx.secondScroll($event); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](26, "i", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        } if (rf & 2) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.is24HourFormat ? ctx.newDate.format("HH") : ctx.newDate.format("hh"), " ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.newDate.format("mm"));
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.newDate.format("ss"));
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("color", ctx.config.FontColor);
+        } }, styles: ["button[_ngcontent-%COMP%] {\r\n  width: 29px;\r\n  height: 100%;\r\n  background: transparent;\r\n  box-sizing: border-box;\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  line-height: 14px;\r\n  text-align: center;\r\n  border: none;\r\n  outline: none;\r\n}\r\n\r\n.monthCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], .monthsCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], .yearsCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%] {\r\n  min-width: 30px;\r\n  padding: 5px 0;\r\n  border: 1px solid #e4e4e4;\r\n  \r\n}\r\n\r\ntable[_ngcontent-%COMP%] {\r\n  width: 100%;\r\n  height: 40px;\r\n  border-collapse: collapse;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  background: white;\r\n  overflow: hidden;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%] {\r\n  width: 220px;\r\n  height: 20px;\r\n  background: #e4e4e4;\r\n  border-top: 1px solid #e4e4e4;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\r\n  width: 50%;\r\n  height: 100%;\r\n  float: left;\r\n  background: transparent;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   button.active[_ngcontent-%COMP%] {\r\n  background: white;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:first-child   button[_ngcontent-%COMP%] {\r\n  border-right: 1px solid #efefef;\r\n}\r\n\r\n.confirmDate[_ngcontent-%COMP%] {\r\n  width: 220px;\r\n  height: 20px;\r\n  background: #efefef;\r\n}\r\n\r\n.confirmDate[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\r\n  width: 100%;\r\n  height: 100%;\r\n  border-top: 1px solid #efefef;\r\n}\r\n\r\nthead[_ngcontent-%COMP%]   tr[_ngcontent-%COMP%] {\r\n  height: 25px;\r\n  border-bottom: 1px solid #efefef;\r\n}\r\n\r\ntr.days[_ngcontent-%COMP%] {\r\n  height: 25px;\r\n}\r\n\r\ntr.days[_ngcontent-%COMP%]   td[_ngcontent-%COMP%] {\r\n  border: none;\r\n}\r\n\r\ntd.active[_ngcontent-%COMP%] {\r\n  background: rgb(230, 232, 234);\r\n}\r\n\r\n.selectbtn[_ngcontent-%COMP%]{\r\n    cursor: pointer;\r\n    font-size: 10px;\r\n    width: 18px;\r\n    padding: 0px 5px;\r\n    color: #5e666f;\r\n}\r\n\r\n.timeLabel[_ngcontent-%COMP%]{\r\n  font-size: x-large;\r\n  text-align: right;\r\n  width: 30px;\r\n  line-height: 1;\r\n}\r\n\r\n.divider[_ngcontent-%COMP%]{\r\n  width: 10px;\r\n  font-size: xx-large;\r\n}\r\n\r\n.clockCell[_ngcontent-%COMP%]{\r\n  width: 50px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRpbWUtcGlja2VyLXNlY29uZHMtY29tcGFjdC5jb21wb25lbnQuc3R5bGUuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWix1QkFBdUI7RUFDdkIsc0JBQXNCO0VBQ3RCLGVBQWU7RUFDZixxQkFBcUI7RUFDckIsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixZQUFZO0VBQ1osYUFBYTtBQUNmOztBQUVBOzs7RUFHRSxlQUFlO0VBQ2YsY0FBYztFQUNkLHlCQUF5Qjs7QUFFM0I7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLHlCQUF5QjtFQUN6QixZQUFZO0VBQ1osc0JBQXNCO0VBQ3RCLGlCQUFpQjtFQUNqQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtFQUNaLG1CQUFtQjtFQUNuQiw2QkFBNkI7QUFDL0I7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsWUFBWTtFQUNaLFdBQVc7RUFDWCx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSwrQkFBK0I7QUFDakM7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtFQUNaLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsWUFBWTtFQUNaLGdDQUFnQztBQUNsQzs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLDhCQUE4QjtBQUNoQzs7QUFHQTtJQUNJLGVBQWU7SUFDZixlQUFlO0lBQ2YsV0FBVztJQUNYLGdCQUFnQjtJQUNoQixjQUFjO0FBQ2xCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLGlCQUFpQjtFQUNqQixXQUFXO0VBQ1gsY0FBYztBQUNoQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxXQUFXO0FBQ2IiLCJmaWxlIjoidGltZS1waWNrZXItc2Vjb25kcy1jb21wYWN0LmNvbXBvbmVudC5zdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJidXR0b24ge1xyXG4gIHdpZHRoOiAyOXB4O1xyXG4gIGhlaWdodDogMTAwJTtcclxuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgbGluZS1oZWlnaHQ6IDE0cHg7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBvdXRsaW5lOiBub25lO1xyXG59XHJcblxyXG4ubW9udGhDYWwgdGQsXHJcbi5tb250aHNDYWwgdGQsXHJcbi55ZWFyc0NhbCB0ZCB7XHJcbiAgbWluLXdpZHRoOiAzMHB4O1xyXG4gIHBhZGRpbmc6IDVweCAwO1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkICNlNGU0ZTQ7XHJcbiAgXHJcbn1cclxuXHJcbnRhYmxlIHtcclxuICB3aWR0aDogMTAwJTtcclxuICBoZWlnaHQ6IDQwcHg7XHJcbiAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxuICBib3JkZXI6IG5vbmU7XHJcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcclxuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxuICBvdmVyZmxvdzogaGlkZGVuO1xyXG59XHJcblxyXG4uZGF0ZVRpbWVUb2dnbGUge1xyXG4gIHdpZHRoOiAyMjBweDtcclxuICBoZWlnaHQ6IDIwcHg7XHJcbiAgYmFja2dyb3VuZDogI2U0ZTRlNDtcclxuICBib3JkZXItdG9wOiAxcHggc29saWQgI2U0ZTRlNDtcclxufVxyXG5cclxuLmRhdGVUaW1lVG9nZ2xlIGJ1dHRvbiB7XHJcbiAgd2lkdGg6IDUwJTtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbn1cclxuXHJcbi5kYXRlVGltZVRvZ2dsZSBidXR0b24uYWN0aXZlIHtcclxuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxufVxyXG5cclxuLmRhdGVUaW1lVG9nZ2xlIDpmaXJzdC1jaGlsZCBidXR0b24ge1xyXG4gIGJvcmRlci1yaWdodDogMXB4IHNvbGlkICNlZmVmZWY7XHJcbn1cclxuXHJcbi5jb25maXJtRGF0ZSB7XHJcbiAgd2lkdGg6IDIyMHB4O1xyXG4gIGhlaWdodDogMjBweDtcclxuICBiYWNrZ3JvdW5kOiAjZWZlZmVmO1xyXG59XHJcblxyXG4uY29uZmlybURhdGUgYnV0dG9uIHtcclxuICB3aWR0aDogMTAwJTtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICNlZmVmZWY7XHJcbn1cclxuXHJcbnRoZWFkIHRyIHtcclxuICBoZWlnaHQ6IDI1cHg7XHJcbiAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNlZmVmZWY7XHJcbn1cclxuXHJcbnRyLmRheXMge1xyXG4gIGhlaWdodDogMjVweDtcclxufVxyXG5cclxudHIuZGF5cyB0ZCB7XHJcbiAgYm9yZGVyOiBub25lO1xyXG59XHJcblxyXG50ZC5hY3RpdmUge1xyXG4gIGJhY2tncm91bmQ6IHJnYigyMzAsIDIzMiwgMjM0KTtcclxufVxyXG5cclxuXHJcbi5zZWxlY3RidG57XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICBmb250LXNpemU6IDEwcHg7XHJcbiAgICB3aWR0aDogMThweDtcclxuICAgIHBhZGRpbmc6IDBweCA1cHg7XHJcbiAgICBjb2xvcjogIzVlNjY2ZjtcclxufVxyXG5cclxuLnRpbWVMYWJlbHtcclxuICBmb250LXNpemU6IHgtbGFyZ2U7XHJcbiAgdGV4dC1hbGlnbjogcmlnaHQ7XHJcbiAgd2lkdGg6IDMwcHg7XHJcbiAgbGluZS1oZWlnaHQ6IDE7XHJcbn1cclxuXHJcbi5kaXZpZGVye1xyXG4gIHdpZHRoOiAxMHB4O1xyXG4gIGZvbnQtc2l6ZTogeHgtbGFyZ2U7XHJcbn1cclxuXHJcbi5jbG9ja0NlbGx7XHJcbiAgd2lkdGg6IDUwcHg7XHJcbn0iXX0= */"], changeDetection: 0 });
+    return LCTimePickerSecondsCompactComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "GkkM":
 /*!**********************************************************************************!*\
   !*** ./projects/libusoftcicom/lc-datepicker/src/lib/lc-date-picker.component.ts ***!
@@ -316,6 +557,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _day_picker_day_picker_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./day-picker/day-picker.component */ "uUN0");
 /* harmony import */ var _time_picker_time_picker_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./time-picker/time-picker.component */ "8PIo");
 /* harmony import */ var _time_picker_compact_time_picker_compact_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./time-picker-compact/time-picker-compact.component */ "MD/8");
+/* harmony import */ var _time_picker_seconds_compact_time_picker_seconds_compact_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./time-picker-seconds-compact/time-picker-seconds-compact.component */ "B8Ml");
+
 
 
 
@@ -327,75 +570,98 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function LCDatePickerComponent_div_0_lc_year_picker_1_Template(rf, ctx) { if (rf & 1) {
-    var _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    var _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "lc-year-picker", 8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_year_picker_1_Template_lc_year_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9); var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r8.onYearSelected($event); })("reset", function LCDatePickerComponent_div_0_lc_year_picker_1_Template_lc_year_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9); var ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r10.onResetDate(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_year_picker_1_Template_lc_year_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r11); var ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r10.onYearSelected($event); })("reset", function LCDatePickerComponent_div_0_lc_year_picker_1_Template_lc_year_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r11); var ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r12.onResetDate(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     var ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("newDate", ctx_r2.newDate)("config", ctx_r2.config);
 } }
 function LCDatePickerComponent_div_0_lc_month_picker_2_Template(rf, ctx) { if (rf & 1) {
-    var _r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    var _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "lc-month-picker", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_month_picker_2_Template_lc_month_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); var ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r11.onMonthSelected($event); })("reset", function LCDatePickerComponent_div_0_lc_month_picker_2_Template_lc_month_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); var ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r13.onResetDate(); })("switchPannel", function LCDatePickerComponent_div_0_lc_month_picker_2_Template_lc_month_picker_switchPannel_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); var ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r14.onSwitchPannel($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_month_picker_2_Template_lc_month_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); var ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r13.onMonthSelected($event); })("reset", function LCDatePickerComponent_div_0_lc_month_picker_2_Template_lc_month_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); var ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r15.onResetDate(); })("switchPannel", function LCDatePickerComponent_div_0_lc_month_picker_2_Template_lc_month_picker_switchPannel_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); var ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r16.onSwitchPannel($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     var ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("newDate", ctx_r3.newDate)("config", ctx_r3.config);
 } }
 function LCDatePickerComponent_div_0_lc_day_picker_3_Template(rf, ctx) { if (rf & 1) {
-    var _r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    var _r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "lc-day-picker", 9);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_day_picker_3_Template_lc_day_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16); var ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r15.onDaySelected($event); })("reset", function LCDatePickerComponent_div_0_lc_day_picker_3_Template_lc_day_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16); var ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r17.onResetDate(); })("switchPannel", function LCDatePickerComponent_div_0_lc_day_picker_3_Template_lc_day_picker_switchPannel_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r16); var ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r18.onSwitchPannel($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_day_picker_3_Template_lc_day_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18); var ctx_r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r17.onDaySelected($event); })("reset", function LCDatePickerComponent_div_0_lc_day_picker_3_Template_lc_day_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18); var ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r19.onResetDate(); })("switchPannel", function LCDatePickerComponent_div_0_lc_day_picker_3_Template_lc_day_picker_switchPannel_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r18); var ctx_r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r20.onSwitchPannel($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("newDate", ctx_r4.newDate)("config", ctx_r4.config);
 } }
-function LCDatePickerComponent_div_0_lc_time_picker_4_Template(rf, ctx) { if (rf & 1) {
-    var _r20 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "lc-time-picker", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_time_picker_4_Template_lc_time_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20); var ctx_r19 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r19.onTimeSelected($event); })("reset", function LCDatePickerComponent_div_0_lc_time_picker_4_Template_lc_time_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r20); var ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r21.onResetDate(); });
+function LCDatePickerComponent_div_0_lc_day_picker_4_Template(rf, ctx) { if (rf & 1) {
+    var _r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "lc-day-picker", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_day_picker_4_Template_lc_day_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22); var ctx_r21 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r21.onDaySelected($event); })("reset", function LCDatePickerComponent_div_0_lc_day_picker_4_Template_lc_day_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22); var ctx_r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r23.onResetDate(); })("switchPannel", function LCDatePickerComponent_div_0_lc_day_picker_4_Template_lc_day_picker_switchPannel_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r22); var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r24.onSwitchPannel($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     var ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("config", ctx_r5.config)("newDate", ctx_r5.newDate);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("newDate", ctx_r5.newDate)("config", ctx_r5.config);
 } }
-function LCDatePickerComponent_div_0_div_5_Template(rf, ctx) { if (rf & 1) {
-    var _r23 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 11);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "lc-time-picker-compact", 12);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_div_5_Template_lc_time_picker_compact_selected_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r23); var ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r22.onTimeSelected($event); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+function LCDatePickerComponent_div_0_lc_time_picker_5_Template(rf, ctx) { if (rf & 1) {
+    var _r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "lc-time-picker", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_lc_time_picker_5_Template_lc_time_picker_selected_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r26); var ctx_r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r25.onTimeSelected($event); })("reset", function LCDatePickerComponent_div_0_lc_time_picker_5_Template_lc_time_picker_reset_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r26); var ctx_r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r27.onResetDate(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("config", ctx_r6.config)("newDate", ctx_r6.newDate);
 } }
 function LCDatePickerComponent_div_0_div_6_Template(rf, ctx) { if (rf & 1) {
-    var _r25 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCDatePickerComponent_div_0_div_6_Template_button_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r25); var ctx_r24 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r24.confirm(); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
+    var _r29 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "lc-time-picker-compact", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_div_6_Template_lc_time_picker_compact_selected_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r29); var ctx_r28 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r28.onTimeSelected($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("background", ctx_r7.config.PrimaryColor);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("config", ctx_r7.config)("newDate", ctx_r7.newDate);
+} }
+function LCDatePickerComponent_div_0_div_7_Template(rf, ctx) { if (rf & 1) {
+    var _r31 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "lc-time-picker-seconds-compact", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("selected", function LCDatePickerComponent_div_0_div_7_Template_lc_time_picker_seconds_compact_selected_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r31); var ctx_r30 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r30.onTimeSelected($event); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    var ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("config", ctx_r8.config)("newDate", ctx_r8.newDate);
+} }
+function LCDatePickerComponent_div_0_div_8_Template(rf, ctx) { if (rf & 1) {
+    var _r33 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCDatePickerComponent_div_0_div_8_Template_button_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r33); var ctx_r32 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r32.confirm(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("background", ctx_r9.config.PrimaryColor);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r7.config.ConfirmLabel);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r9.config.ConfirmLabel);
 } }
 function LCDatePickerComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, LCDatePickerComponent_div_0_lc_year_picker_1_Template, 1, 2, "lc-year-picker", 3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, LCDatePickerComponent_div_0_lc_month_picker_2_Template, 1, 2, "lc-month-picker", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, LCDatePickerComponent_div_0_lc_day_picker_3_Template, 1, 2, "lc-day-picker", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, LCDatePickerComponent_div_0_lc_time_picker_4_Template, 1, 2, "lc-time-picker", 5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, LCDatePickerComponent_div_0_div_5_Template, 2, 2, "div", 6);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, LCDatePickerComponent_div_0_div_6_Template, 3, 3, "div", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, LCDatePickerComponent_div_0_lc_day_picker_4_Template, 1, 2, "lc-day-picker", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, LCDatePickerComponent_div_0_lc_time_picker_5_Template, 1, 2, "lc-time-picker", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](6, LCDatePickerComponent_div_0_div_6_Template, 2, 2, "div", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](7, LCDatePickerComponent_div_0_div_7_Template, 2, 2, "div", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, LCDatePickerComponent_div_0_div_8_Template, 3, 3, "div", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
@@ -407,16 +673,20 @@ function LCDatePickerComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngSwitchCase", 1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngSwitchCase", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngSwitchCase", 0);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.config.CalendarType === 1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.config.CalendarType <= 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.config.CalendarType === 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.config.CalendarType <= 1 || ctx_r0.config.CalendarType == 6);
 } }
 function LCDatePickerComponent_div_1_Template(rf, ctx) { if (rf & 1) {
-    var _r27 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    var _r35 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 15);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCDatePickerComponent_div_1_Template_div_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r27); var ctx_r26 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r26.close(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function LCDatePickerComponent_div_1_Template_div_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r35); var ctx_r34 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r34.close(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 var panels;
@@ -474,7 +744,6 @@ var LCDatePickerComponent = /** @class */ (function () {
             var componentPosition = this._elementRef.nativeElement.parentNode.getBoundingClientRect();
             var scroll_1 = 0;
             if (this.appendById != null) {
-                console.debug(document.getElementById(this.appendById));
                 var appendObj = document.getElementById(this.appendById);
                 if (appendObj) {
                     scroll_1 = appendObj.scrollTop;
@@ -482,11 +751,9 @@ var LCDatePickerComponent = /** @class */ (function () {
             }
             if (windowHeight - componentPosition.top > this.calendarSize(this.config.CalendarType)) {
                 this.componentMargin = 0 + (scroll_1 * -1) + 'px';
-                console.debug("111");
             }
             else {
                 this.componentMargin = (this.calendarSize(this.config.CalendarType) + scroll_1) * -1 + 'px';
-                console.debug("222");
             }
             this.initCalendar();
             this.cd.markForCheck();
@@ -503,6 +770,10 @@ var LCDatePickerComponent = /** @class */ (function () {
     LCDatePickerComponent.prototype.setPanel = function (panel) {
         switch (panel) {
             case _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_1__["ECalendarType"].DateTime: {
+                this.activePanel = panels.Day;
+                break;
+            }
+            case _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_1__["ECalendarType"].DateTimeSeconds: {
                 this.activePanel = panels.Day;
                 break;
             }
@@ -645,13 +916,13 @@ var LCDatePickerComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("tabindex", ctx.tabIndex);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("margin-top", ctx.componentMargin);
         } }, inputs: { opened: "opened", config: "config", date: "date", appendById: "appendById" }, outputs: { openedChange: "openedChange", dateChange: "dateChange" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 2, vars: 2, consts: [["class", "calendar", 3, "ngSwitch", 4, "ngIf"], ["class", "calendarBackground", 3, "click", 4, "ngIf"], [1, "calendar", 3, "ngSwitch"], [3, "newDate", "config", "selected", "reset", 4, "ngSwitchCase"], [3, "newDate", "config", "selected", "reset", "switchPannel", 4, "ngSwitchCase"], [3, "config", "newDate", "selected", "reset", 4, "ngSwitchCase"], ["class", "dateTimeToggle", 4, "ngIf"], ["class", "confirmDate", 3, "background", 4, "ngIf"], [3, "newDate", "config", "selected", "reset"], [3, "newDate", "config", "selected", "reset", "switchPannel"], [3, "config", "newDate", "selected", "reset"], [1, "dateTimeToggle"], [3, "config", "newDate", "selected"], [1, "confirmDate"], [3, "click"], [1, "calendarBackground", 3, "click"]], template: function LCDatePickerComponent_Template(rf, ctx) { if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, LCDatePickerComponent_div_0_Template, 7, 7, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, LCDatePickerComponent_div_0_Template, 9, 9, "div", 0);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, LCDatePickerComponent_div_1_Template, 1, 0, "div", 1);
         } if (rf & 2) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.opened);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.opened);
-        } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgSwitch"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgSwitchCase"], _year_picker_year_picker_component__WEBPACK_IMPORTED_MODULE_4__["LCYearPickerComponent"], _month_picker_month_picker_component__WEBPACK_IMPORTED_MODULE_5__["LCMonthPickerComponent"], _day_picker_day_picker_component__WEBPACK_IMPORTED_MODULE_6__["LCDayPickerComponent"], _time_picker_time_picker_component__WEBPACK_IMPORTED_MODULE_7__["LCTimePickerComponent"], _time_picker_compact_time_picker_compact_component__WEBPACK_IMPORTED_MODULE_8__["LCTimePickerCompactComponent"]], styles: ["[_nghost-%COMP%] {\r\n  position: absolute;\r\n  color: black;\r\n  background: transparent;\r\n  font-family: open_sans-n4, open_sans, Helvetica, Arial, sans-serif;\r\n  font-size: 12px;\r\n  z-index: 101;\r\n  -webkit-touch-callout: none; \r\n  -webkit-user-select: none;  \r\n  -moz-user-select: none; \r\n  -ms-user-select: none; \r\n  user-select: none; \r\n  outline: none;\r\n}\r\n\r\n.displayDown[_nghost-%COMP%] {\r\n  top: 20px;\r\n}\r\n\r\n.displayUp[_nghost-%COMP%] {\r\n  bottom: 20px;\r\n}\r\n\r\nbutton[_ngcontent-%COMP%] {\r\n  width: 100%;\r\n  height: 100%;\r\n  background: transparent;\r\n  box-sizing: border-box;\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  line-height: 14px;\r\n  text-align: center;\r\n  border: none;\r\n  outline: none;\r\n}\r\n\r\n.monthCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], .monthsCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], .yearsCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], .dateRangePicker[_ngcontent-%COMP%]   td[_ngcontent-%COMP%] {\r\n  min-width: 30px;\r\n  padding: 5px 0;\r\n  border: 1px solid #e4e4e4;\r\n}\r\n\r\ntd[_ngcontent-%COMP%]:hover {\r\n  background: #efefef;\r\n}\r\n\r\n.calendar[_ngcontent-%COMP%] {\r\n  box-shadow: rgba(0, 0, 0, 0.156863) 0px 1px 5px 0px, rgba(0, 0, 0, 0.26) -2px -1px 5px 0px;\r\n  box-sizing: border-box;\r\n  display: block;\r\n  font-size: 12px;\r\n  line-height: 14px;\r\n  margin: 5px;\r\n  width: 220px;\r\n  position: fixed !important;\r\n\r\n}\r\n\r\ntable[_ngcontent-%COMP%] {\r\n  width: 220px;\r\n  height: calc(100% - 36px);\r\n  border-collapse: collapse;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  display: table;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%] {\r\n  width: 220px;\r\n  height: 41px;\r\n  background: #e4e4e4;\r\n  border-top: 1px solid #e4e4e4;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\r\n  width: 50%;\r\n  height: 100%;\r\n  float: left;\r\n  background: transparent;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   button.active[_ngcontent-%COMP%] {\r\n  background: white;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:first-child   button[_ngcontent-%COMP%] {\r\n  border-right: 1px solid #efefef;\r\n}\r\n\r\n.confirmDate[_ngcontent-%COMP%] {\r\n  width: 220px;\r\n  height: 20px;\r\n  background: #5e666f;\r\n  box-shadow: rgba(0, 0, 0, 0.156863) 0px 1px 1px 0, rgba(0, 0, 0, 0.26) 0 -1px 1px 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.confirmDate[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\r\n  width: 100%;\r\n  height: 100%;\r\n  border-top: 1px solid #efefef;\r\n  color: #e0e0e0;\r\n  font-weight: bold;\r\n}\r\n\r\nthead[_ngcontent-%COMP%]   tr[_ngcontent-%COMP%] {\r\n  height: 25px;\r\n  background: #efefef;\r\n}\r\n\r\ntr.days[_ngcontent-%COMP%] {\r\n  height: 25px;\r\n  width: 32px;\r\n}\r\n\r\ntr.days[_ngcontent-%COMP%]   td[_ngcontent-%COMP%] {\r\n  border: none;\r\n}\r\n\r\ntd.active[_ngcontent-%COMP%] {\r\n  background: rgb(230, 232, 234);\r\n}\r\n\r\n.selectbtn[_ngcontent-%COMP%] {\r\n  cursor: pointer;\r\n}\r\n\r\n.rotateUp[_ngcontent-%COMP%] {\r\n  transform: rotate(-90deg);\r\n}\r\n\r\n.rotateDown[_ngcontent-%COMP%] {\r\n  transform: rotate(90deg);\r\n}\r\n\r\n.calendarBackground[_ngcontent-%COMP%] {\r\n  position: fixed;\r\n  height: 100%;\r\n  width: 100%;\r\n  background: transparent;\r\n  z-index: -10;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n}\r\n\r\n[_nghost-%COMP%]     .fa-lg {\r\n  font-size: 1.5em;\r\n  line-height: 0em;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxjLWRhdGUtcGlja2VyLmNvbXBvbmVudC5zdHlsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLHVCQUF1QjtFQUN2QixrRUFBa0U7RUFDbEUsZUFBZTtFQUNmLFlBQVk7RUFDWiwyQkFBMkIsRUFBRSxlQUFlO0VBQzVDLHlCQUF5QixFQUFFLFdBQVcsRUFDWixtQkFBbUI7RUFDN0Msc0JBQXNCLEVBQUUsWUFBWTtFQUNwQyxxQkFBcUIsRUFBRSwyQkFBMkI7RUFDbEQsaUJBQWlCLEVBQUUsbUNBQW1DO0VBQ3RELGFBQWE7QUFDZjs7QUFFQTtFQUNFLFNBQVM7QUFDWDs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osdUJBQXVCO0VBQ3ZCLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YscUJBQXFCO0VBQ3JCLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGFBQWE7QUFDZjs7QUFFQTs7OztFQUlFLGVBQWU7RUFDZixjQUFjO0VBQ2QseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsMEZBQTBGO0VBQzFGLHNCQUFzQjtFQUN0QixjQUFjO0VBQ2QsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixXQUFXO0VBQ1gsWUFBWTtFQUNaLDBCQUEwQjs7QUFFNUI7O0FBRUE7RUFDRSxZQUFZO0VBQ1oseUJBQXlCO0VBQ3pCLHlCQUF5QjtFQUN6QixZQUFZO0VBQ1osc0JBQXNCO0VBQ3RCLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtFQUNaLG1CQUFtQjtFQUNuQiw2QkFBNkI7QUFDL0I7O0FBRUE7RUFDRSxVQUFVO0VBQ1YsWUFBWTtFQUNaLFdBQVc7RUFDWCx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSwrQkFBK0I7QUFDakM7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTtFQUNaLG1CQUFtQjtFQUNuQixtRkFBbUY7RUFDbkYsc0JBQXNCO0FBQ3hCOztBQUVBO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWiw2QkFBNkI7RUFDN0IsY0FBYztFQUNkLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLFlBQVk7RUFDWixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osV0FBVztBQUNiOztBQUVBO0VBQ0UsWUFBWTtBQUNkOztBQUVBO0VBQ0UsOEJBQThCO0FBQ2hDOztBQUVBO0VBQ0UsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFDQTtFQUNFLHdCQUF3QjtBQUMxQjs7QUFFQTtFQUNFLGVBQWU7RUFDZixZQUFZO0VBQ1osV0FBVztFQUNYLHVCQUF1QjtFQUN2QixZQUFZO0VBQ1osTUFBTTtFQUNOLFNBQVM7RUFDVCxPQUFPO0VBQ1AsUUFBUTtBQUNWOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtBQUNsQiIsImZpbGUiOiJsYy1kYXRlLXBpY2tlci5jb21wb25lbnQuc3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBjb2xvcjogYmxhY2s7XHJcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbiAgZm9udC1mYW1pbHk6IG9wZW5fc2Fucy1uNCwgb3Blbl9zYW5zLCBIZWx2ZXRpY2EsIEFyaWFsLCBzYW5zLXNlcmlmO1xyXG4gIGZvbnQtc2l6ZTogMTJweDtcclxuICB6LWluZGV4OiAxMDE7XHJcbiAgLXdlYmtpdC10b3VjaC1jYWxsb3V0OiBub25lOyAvKiBpT1MgU2FmYXJpICovXHJcbiAgLXdlYmtpdC11c2VyLXNlbGVjdDogbm9uZTsgLyogU2FmYXJpICovXHJcbiAgLWtodG1sLXVzZXItc2VsZWN0OiBub25lOyAvKiBLb25xdWVyb3IgSFRNTCAqL1xyXG4gIC1tb3otdXNlci1zZWxlY3Q6IG5vbmU7IC8qIEZpcmVmb3ggKi9cclxuICAtbXMtdXNlci1zZWxlY3Q6IG5vbmU7IC8qIEludGVybmV0IEV4cGxvcmVyL0VkZ2UgKi9cclxuICB1c2VyLXNlbGVjdDogbm9uZTsgLyogTm9uLXByZWZpeGVkIHZlcnNpb24sIGN1cnJlbnRseSovXHJcbiAgb3V0bGluZTogbm9uZTtcclxufVxyXG5cclxuOmhvc3QuZGlzcGxheURvd24ge1xyXG4gIHRvcDogMjBweDtcclxufVxyXG5cclxuOmhvc3QuZGlzcGxheVVwIHtcclxuICBib3R0b206IDIwcHg7XHJcbn1cclxuXHJcbmJ1dHRvbiB7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgaGVpZ2h0OiAxMDAlO1xyXG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgY3Vyc29yOiBwb2ludGVyO1xyXG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICBsaW5lLWhlaWdodDogMTRweDtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgYm9yZGVyOiBub25lO1xyXG4gIG91dGxpbmU6IG5vbmU7XHJcbn1cclxuXHJcbi5tb250aENhbCB0ZCxcclxuLm1vbnRoc0NhbCB0ZCxcclxuLnllYXJzQ2FsIHRkLFxyXG4uZGF0ZVJhbmdlUGlja2VyIHRkIHtcclxuICBtaW4td2lkdGg6IDMwcHg7XHJcbiAgcGFkZGluZzogNXB4IDA7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgI2U0ZTRlNDtcclxufVxyXG5cclxudGQ6aG92ZXIge1xyXG4gIGJhY2tncm91bmQ6ICNlZmVmZWY7XHJcbn1cclxuXHJcbi5jYWxlbmRhciB7XHJcbiAgYm94LXNoYWRvdzogcmdiYSgwLCAwLCAwLCAwLjE1Njg2MykgMHB4IDFweCA1cHggMHB4LCByZ2JhKDAsIDAsIDAsIDAuMjYpIC0ycHggLTFweCA1cHggMHB4O1xyXG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgZm9udC1zaXplOiAxMnB4O1xyXG4gIGxpbmUtaGVpZ2h0OiAxNHB4O1xyXG4gIG1hcmdpbjogNXB4O1xyXG4gIHdpZHRoOiAyMjBweDtcclxuICBwb3NpdGlvbjogZml4ZWQgIWltcG9ydGFudDtcclxuXHJcbn1cclxuXHJcbnRhYmxlIHtcclxuICB3aWR0aDogMjIwcHg7XHJcbiAgaGVpZ2h0OiBjYWxjKDEwMCUgLSAzNnB4KTtcclxuICBib3JkZXItY29sbGFwc2U6IGNvbGxhcHNlO1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGRpc3BsYXk6IHRhYmxlO1xyXG59XHJcblxyXG4uZGF0ZVRpbWVUb2dnbGUge1xyXG4gIHdpZHRoOiAyMjBweDtcclxuICBoZWlnaHQ6IDQxcHg7XHJcbiAgYmFja2dyb3VuZDogI2U0ZTRlNDtcclxuICBib3JkZXItdG9wOiAxcHggc29saWQgI2U0ZTRlNDtcclxufVxyXG5cclxuLmRhdGVUaW1lVG9nZ2xlIGJ1dHRvbiB7XHJcbiAgd2lkdGg6IDUwJTtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbn1cclxuXHJcbi5kYXRlVGltZVRvZ2dsZSBidXR0b24uYWN0aXZlIHtcclxuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxufVxyXG5cclxuLmRhdGVUaW1lVG9nZ2xlIDpmaXJzdC1jaGlsZCBidXR0b24ge1xyXG4gIGJvcmRlci1yaWdodDogMXB4IHNvbGlkICNlZmVmZWY7XHJcbn1cclxuXHJcbi5jb25maXJtRGF0ZSB7XHJcbiAgd2lkdGg6IDIyMHB4O1xyXG4gIGhlaWdodDogMjBweDtcclxuICBiYWNrZ3JvdW5kOiAjNWU2NjZmO1xyXG4gIGJveC1zaGFkb3c6IHJnYmEoMCwgMCwgMCwgMC4xNTY4NjMpIDBweCAxcHggMXB4IDAsIHJnYmEoMCwgMCwgMCwgMC4yNikgMCAtMXB4IDFweCAwO1xyXG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbn1cclxuXHJcbi5jb25maXJtRGF0ZSBidXR0b24ge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGhlaWdodDogMTAwJTtcclxuICBib3JkZXItdG9wOiAxcHggc29saWQgI2VmZWZlZjtcclxuICBjb2xvcjogI2UwZTBlMDtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG5cclxudGhlYWQgdHIge1xyXG4gIGhlaWdodDogMjVweDtcclxuICBiYWNrZ3JvdW5kOiAjZWZlZmVmO1xyXG59XHJcblxyXG50ci5kYXlzIHtcclxuICBoZWlnaHQ6IDI1cHg7XHJcbiAgd2lkdGg6IDMycHg7XHJcbn1cclxuXHJcbnRyLmRheXMgdGQge1xyXG4gIGJvcmRlcjogbm9uZTtcclxufVxyXG5cclxudGQuYWN0aXZlIHtcclxuICBiYWNrZ3JvdW5kOiByZ2IoMjMwLCAyMzIsIDIzNCk7XHJcbn1cclxuXHJcbi5zZWxlY3RidG4ge1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG5cclxuLnJvdGF0ZVVwIHtcclxuICB0cmFuc2Zvcm06IHJvdGF0ZSgtOTBkZWcpO1xyXG59XHJcbi5yb3RhdGVEb3duIHtcclxuICB0cmFuc2Zvcm06IHJvdGF0ZSg5MGRlZyk7XHJcbn1cclxuXHJcbi5jYWxlbmRhckJhY2tncm91bmQge1xyXG4gIHBvc2l0aW9uOiBmaXhlZDtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbiAgei1pbmRleDogLTEwO1xyXG4gIHRvcDogMDtcclxuICBib3R0b206IDA7XHJcbiAgbGVmdDogMDtcclxuICByaWdodDogMDtcclxufVxyXG5cclxuOmhvc3QgPj4+IC5mYS1sZyB7XHJcbiAgZm9udC1zaXplOiAxLjVlbTtcclxuICBsaW5lLWhlaWdodDogMGVtO1xyXG59XHJcbiJdfQ== */"], changeDetection: 0 });
+        } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgSwitch"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgSwitchCase"], _year_picker_year_picker_component__WEBPACK_IMPORTED_MODULE_4__["LCYearPickerComponent"], _month_picker_month_picker_component__WEBPACK_IMPORTED_MODULE_5__["LCMonthPickerComponent"], _day_picker_day_picker_component__WEBPACK_IMPORTED_MODULE_6__["LCDayPickerComponent"], _time_picker_time_picker_component__WEBPACK_IMPORTED_MODULE_7__["LCTimePickerComponent"], _time_picker_compact_time_picker_compact_component__WEBPACK_IMPORTED_MODULE_8__["LCTimePickerCompactComponent"], _time_picker_seconds_compact_time_picker_seconds_compact_component__WEBPACK_IMPORTED_MODULE_9__["LCTimePickerSecondsCompactComponent"]], styles: ["[_nghost-%COMP%] {\r\n  position: absolute;\r\n  color: black;\r\n  background: transparent;\r\n  font-family: open_sans-n4, open_sans, Helvetica, Arial, sans-serif;\r\n  font-size: 12px;\r\n  z-index: 101;\r\n  -webkit-touch-callout: none; \r\n  -webkit-user-select: none;  \r\n  -moz-user-select: none; \r\n  -ms-user-select: none; \r\n  user-select: none; \r\n  outline: none;\r\n}\r\n\r\n.displayDown[_nghost-%COMP%] {\r\n  top: 20px;\r\n}\r\n\r\n.displayUp[_nghost-%COMP%] {\r\n  bottom: 20px;\r\n}\r\n\r\nbutton[_ngcontent-%COMP%] {\r\n  width: 100%;\r\n  height: 100%;\r\n  background: transparent;\r\n  box-sizing: border-box;\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  line-height: 14px;\r\n  text-align: center;\r\n  border: none;\r\n  outline: none;\r\n}\r\n\r\n.monthCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], .monthsCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], .yearsCal[_ngcontent-%COMP%]   td[_ngcontent-%COMP%], .dateRangePicker[_ngcontent-%COMP%]   td[_ngcontent-%COMP%] {\r\n  min-width: 30px;\r\n  padding: 5px 0;\r\n  border: 1px solid #e4e4e4;\r\n}\r\n\r\ntd[_ngcontent-%COMP%]:hover {\r\n  background: #efefef;\r\n}\r\n\r\n.calendar[_ngcontent-%COMP%] {\r\n  box-shadow: rgba(0, 0, 0, 0.156863) 0px 1px 5px 0px, rgba(0, 0, 0, 0.26) -2px -1px 5px 0px;\r\n  box-sizing: border-box;\r\n  display: block;\r\n  font-size: 12px;\r\n  line-height: 14px;\r\n  margin: 5px;\r\n  width: 220px;\r\n}\r\n\r\ntable[_ngcontent-%COMP%] {\r\n  width: 220px;\r\n  height: calc(100% - 36px);\r\n  border-collapse: collapse;\r\n  border: none;\r\n  box-sizing: border-box;\r\n  display: table;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%] {\r\n  width: 220px;\r\n  height: 41px;\r\n  background: #e4e4e4;\r\n  border-top: 1px solid #e4e4e4;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\r\n  width: 50%;\r\n  height: 100%;\r\n  float: left;\r\n  background: transparent;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   button.active[_ngcontent-%COMP%] {\r\n  background: white;\r\n}\r\n\r\n.dateTimeToggle[_ngcontent-%COMP%]   [_ngcontent-%COMP%]:first-child   button[_ngcontent-%COMP%] {\r\n  border-right: 1px solid #efefef;\r\n}\r\n\r\n.confirmDate[_ngcontent-%COMP%] {\r\n  width: 220px;\r\n  height: 20px;\r\n  background: #5e666f;\r\n  box-shadow: rgba(0, 0, 0, 0.156863) 0px 1px 1px 0, rgba(0, 0, 0, 0.26) 0 -1px 1px 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n.confirmDate[_ngcontent-%COMP%]   button[_ngcontent-%COMP%] {\r\n  width: 100%;\r\n  height: 100%;\r\n  border-top: 1px solid #efefef;\r\n  color: #e0e0e0;\r\n  font-weight: bold;\r\n}\r\n\r\nthead[_ngcontent-%COMP%]   tr[_ngcontent-%COMP%] {\r\n  height: 25px;\r\n  background: #efefef;\r\n}\r\n\r\ntr.days[_ngcontent-%COMP%] {\r\n  height: 25px;\r\n  width: 32px;\r\n}\r\n\r\ntr.days[_ngcontent-%COMP%]   td[_ngcontent-%COMP%] {\r\n  border: none;\r\n}\r\n\r\ntd.active[_ngcontent-%COMP%] {\r\n  background: rgb(230, 232, 234);\r\n}\r\n\r\n.selectbtn[_ngcontent-%COMP%] {\r\n  cursor: pointer;\r\n}\r\n\r\n.rotateUp[_ngcontent-%COMP%] {\r\n  transform: rotate(-90deg);\r\n}\r\n\r\n.rotateDown[_ngcontent-%COMP%] {\r\n  transform: rotate(90deg);\r\n}\r\n\r\n.calendarBackground[_ngcontent-%COMP%] {\r\n  position: fixed;\r\n  height: 100%;\r\n  width: 100%;\r\n  background: transparent;\r\n  z-index: -10;\r\n  top: 0;\r\n  bottom: 0;\r\n  left: 0;\r\n  right: 0;\r\n}\r\n\r\n[_nghost-%COMP%]     .fa-lg {\r\n  font-size: 1.5em;\r\n  line-height: 0em;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxjLWRhdGUtcGlja2VyLmNvbXBvbmVudC5zdHlsZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLHVCQUF1QjtFQUN2QixrRUFBa0U7RUFDbEUsZUFBZTtFQUNmLFlBQVk7RUFDWiwyQkFBMkIsRUFBRSxlQUFlO0VBQzVDLHlCQUF5QixFQUFFLFdBQVcsRUFDWixtQkFBbUI7RUFDN0Msc0JBQXNCLEVBQUUsWUFBWTtFQUNwQyxxQkFBcUIsRUFBRSwyQkFBMkI7RUFDbEQsaUJBQWlCLEVBQUUsbUNBQW1DO0VBQ3RELGFBQWE7QUFDZjs7QUFFQTtFQUNFLFNBQVM7QUFDWDs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osdUJBQXVCO0VBQ3ZCLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YscUJBQXFCO0VBQ3JCLGlCQUFpQjtFQUNqQixrQkFBa0I7RUFDbEIsWUFBWTtFQUNaLGFBQWE7QUFDZjs7QUFFQTs7OztFQUlFLGVBQWU7RUFDZixjQUFjO0VBQ2QseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsMEZBQTBGO0VBQzFGLHNCQUFzQjtFQUN0QixjQUFjO0VBQ2QsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixXQUFXO0VBQ1gsWUFBWTtBQUNkOztBQUVBO0VBQ0UsWUFBWTtFQUNaLHlCQUF5QjtFQUN6Qix5QkFBeUI7RUFDekIsWUFBWTtFQUNaLHNCQUFzQjtFQUN0QixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWixtQkFBbUI7RUFDbkIsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7RUFDWixXQUFXO0VBQ1gsdUJBQXVCO0FBQ3pCOztBQUVBO0VBQ0UsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsK0JBQStCO0FBQ2pDOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWixtQkFBbUI7RUFDbkIsbUZBQW1GO0VBQ25GLHNCQUFzQjtBQUN4Qjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osNkJBQTZCO0VBQzdCLGNBQWM7RUFDZCxpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLDhCQUE4QjtBQUNoQzs7QUFFQTtFQUNFLGVBQWU7QUFDakI7O0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBQ0E7RUFDRSx3QkFBd0I7QUFDMUI7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsWUFBWTtFQUNaLFdBQVc7RUFDWCx1QkFBdUI7RUFDdkIsWUFBWTtFQUNaLE1BQU07RUFDTixTQUFTO0VBQ1QsT0FBTztFQUNQLFFBQVE7QUFDVjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixnQkFBZ0I7QUFDbEIiLCJmaWxlIjoibGMtZGF0ZS1waWNrZXIuY29tcG9uZW50LnN0eWxlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgY29sb3I6IGJsYWNrO1xyXG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG4gIGZvbnQtZmFtaWx5OiBvcGVuX3NhbnMtbjQsIG9wZW5fc2FucywgSGVsdmV0aWNhLCBBcmlhbCwgc2Fucy1zZXJpZjtcclxuICBmb250LXNpemU6IDEycHg7XHJcbiAgei1pbmRleDogMTAxO1xyXG4gIC13ZWJraXQtdG91Y2gtY2FsbG91dDogbm9uZTsgLyogaU9TIFNhZmFyaSAqL1xyXG4gIC13ZWJraXQtdXNlci1zZWxlY3Q6IG5vbmU7IC8qIFNhZmFyaSAqL1xyXG4gIC1raHRtbC11c2VyLXNlbGVjdDogbm9uZTsgLyogS29ucXVlcm9yIEhUTUwgKi9cclxuICAtbW96LXVzZXItc2VsZWN0OiBub25lOyAvKiBGaXJlZm94ICovXHJcbiAgLW1zLXVzZXItc2VsZWN0OiBub25lOyAvKiBJbnRlcm5ldCBFeHBsb3Jlci9FZGdlICovXHJcbiAgdXNlci1zZWxlY3Q6IG5vbmU7IC8qIE5vbi1wcmVmaXhlZCB2ZXJzaW9uLCBjdXJyZW50bHkqL1xyXG4gIG91dGxpbmU6IG5vbmU7XHJcbn1cclxuXHJcbjpob3N0LmRpc3BsYXlEb3duIHtcclxuICB0b3A6IDIwcHg7XHJcbn1cclxuXHJcbjpob3N0LmRpc3BsYXlVcCB7XHJcbiAgYm90dG9tOiAyMHB4O1xyXG59XHJcblxyXG5idXR0b24ge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGhlaWdodDogMTAwJTtcclxuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgbGluZS1oZWlnaHQ6IDE0cHg7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBvdXRsaW5lOiBub25lO1xyXG59XHJcblxyXG4ubW9udGhDYWwgdGQsXHJcbi5tb250aHNDYWwgdGQsXHJcbi55ZWFyc0NhbCB0ZCxcclxuLmRhdGVSYW5nZVBpY2tlciB0ZCB7XHJcbiAgbWluLXdpZHRoOiAzMHB4O1xyXG4gIHBhZGRpbmc6IDVweCAwO1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkICNlNGU0ZTQ7XHJcbn1cclxuXHJcbnRkOmhvdmVyIHtcclxuICBiYWNrZ3JvdW5kOiAjZWZlZmVmO1xyXG59XHJcblxyXG4uY2FsZW5kYXIge1xyXG4gIGJveC1zaGFkb3c6IHJnYmEoMCwgMCwgMCwgMC4xNTY4NjMpIDBweCAxcHggNXB4IDBweCwgcmdiYSgwLCAwLCAwLCAwLjI2KSAtMnB4IC0xcHggNXB4IDBweDtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG4gIGZvbnQtc2l6ZTogMTJweDtcclxuICBsaW5lLWhlaWdodDogMTRweDtcclxuICBtYXJnaW46IDVweDtcclxuICB3aWR0aDogMjIwcHg7XHJcbn1cclxuXHJcbnRhYmxlIHtcclxuICB3aWR0aDogMjIwcHg7XHJcbiAgaGVpZ2h0OiBjYWxjKDEwMCUgLSAzNnB4KTtcclxuICBib3JkZXItY29sbGFwc2U6IGNvbGxhcHNlO1xyXG4gIGJvcmRlcjogbm9uZTtcclxuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGRpc3BsYXk6IHRhYmxlO1xyXG59XHJcblxyXG4uZGF0ZVRpbWVUb2dnbGUge1xyXG4gIHdpZHRoOiAyMjBweDtcclxuICBoZWlnaHQ6IDQxcHg7XHJcbiAgYmFja2dyb3VuZDogI2U0ZTRlNDtcclxuICBib3JkZXItdG9wOiAxcHggc29saWQgI2U0ZTRlNDtcclxufVxyXG5cclxuLmRhdGVUaW1lVG9nZ2xlIGJ1dHRvbiB7XHJcbiAgd2lkdGg6IDUwJTtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgZmxvYXQ6IGxlZnQ7XHJcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbn1cclxuXHJcbi5kYXRlVGltZVRvZ2dsZSBidXR0b24uYWN0aXZlIHtcclxuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxufVxyXG5cclxuLmRhdGVUaW1lVG9nZ2xlIDpmaXJzdC1jaGlsZCBidXR0b24ge1xyXG4gIGJvcmRlci1yaWdodDogMXB4IHNvbGlkICNlZmVmZWY7XHJcbn1cclxuXHJcbi5jb25maXJtRGF0ZSB7XHJcbiAgd2lkdGg6IDIyMHB4O1xyXG4gIGhlaWdodDogMjBweDtcclxuICBiYWNrZ3JvdW5kOiAjNWU2NjZmO1xyXG4gIGJveC1zaGFkb3c6IHJnYmEoMCwgMCwgMCwgMC4xNTY4NjMpIDBweCAxcHggMXB4IDAsIHJnYmEoMCwgMCwgMCwgMC4yNikgMCAtMXB4IDFweCAwO1xyXG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbn1cclxuXHJcbi5jb25maXJtRGF0ZSBidXR0b24ge1xyXG4gIHdpZHRoOiAxMDAlO1xyXG4gIGhlaWdodDogMTAwJTtcclxuICBib3JkZXItdG9wOiAxcHggc29saWQgI2VmZWZlZjtcclxuICBjb2xvcjogI2UwZTBlMDtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxufVxyXG5cclxudGhlYWQgdHIge1xyXG4gIGhlaWdodDogMjVweDtcclxuICBiYWNrZ3JvdW5kOiAjZWZlZmVmO1xyXG59XHJcblxyXG50ci5kYXlzIHtcclxuICBoZWlnaHQ6IDI1cHg7XHJcbiAgd2lkdGg6IDMycHg7XHJcbn1cclxuXHJcbnRyLmRheXMgdGQge1xyXG4gIGJvcmRlcjogbm9uZTtcclxufVxyXG5cclxudGQuYWN0aXZlIHtcclxuICBiYWNrZ3JvdW5kOiByZ2IoMjMwLCAyMzIsIDIzNCk7XHJcbn1cclxuXHJcbi5zZWxlY3RidG4ge1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG5cclxuLnJvdGF0ZVVwIHtcclxuICB0cmFuc2Zvcm06IHJvdGF0ZSgtOTBkZWcpO1xyXG59XHJcbi5yb3RhdGVEb3duIHtcclxuICB0cmFuc2Zvcm06IHJvdGF0ZSg5MGRlZyk7XHJcbn1cclxuXHJcbi5jYWxlbmRhckJhY2tncm91bmQge1xyXG4gIHBvc2l0aW9uOiBmaXhlZDtcclxuICBoZWlnaHQ6IDEwMCU7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbiAgei1pbmRleDogLTEwO1xyXG4gIHRvcDogMDtcclxuICBib3R0b206IDA7XHJcbiAgbGVmdDogMDtcclxuICByaWdodDogMDtcclxufVxyXG5cclxuOmhvc3QgPj4+IC5mYS1sZyB7XHJcbiAgZm9udC1zaXplOiAxLjVlbTtcclxuICBsaW5lLWhlaWdodDogMGVtO1xyXG59XHJcbiJdfQ== */"], changeDetection: 0 });
     return LCDatePickerComponent;
 }());
 
@@ -684,6 +955,7 @@ var ECalendarType;
     ECalendarType[ECalendarType["MonthYear"] = 3] = "MonthYear";
     ECalendarType[ECalendarType["Year"] = 4] = "Year";
     ECalendarType[ECalendarType["DateRange"] = 5] = "DateRange";
+    ECalendarType[ECalendarType["DateTimeSeconds"] = 6] = "DateTimeSeconds";
 })(ECalendarType || (ECalendarType = {}));
 var ECalendarNavigation;
 (function (ECalendarNavigation) {
@@ -974,11 +1246,13 @@ var DatePickerConfig = /** @class */ (function () {
         this.disabledTimeRanges.push({
             startTime: {
                 hour: min.hour(),
-                minute: min.minutes()
+                minute: min.minutes(),
+                second: min.seconds()
             },
             stopTime: {
                 hour: max.hours(),
-                minute: max.minutes()
+                minute: max.minutes(),
+                second: min.seconds()
             }
         });
     };
@@ -1838,23 +2112,8 @@ var AppComponent = /** @class */ (function () {
             .add(30, 'years')
             .toObject();
         var today = this.todayDateObject.toObject();
-        this.config.CalendarType = _libusoftcicom_lc_datepicker__WEBPACK_IMPORTED_MODULE_0__["ECalendarType"].Date;
-        this.config.Localization = 'hr';
-        this.config.MinDate = {
-            years: this.fromDateObject.years,
-            months: this.fromDateObject.months,
-            date: this.fromDateObject.date
-        };
-        this.config.MaxDate = {
-            years: this.toDateObject.years,
-            months: this.toDateObject.months,
-            date: this.toDateObject.date
-        };
-        this.generateRandDates();
-        // define range of unavailable dates
-        this.config.setDisabledDates(this.randomDisabledDates);
-        // define range of unavailable time
-        this.setDisabledTimeRanges();
+        this.config.CalendarType = _libusoftcicom_lc_datepicker__WEBPACK_IMPORTED_MODULE_0__["ECalendarType"].DateTime;
+        this.config.Localization = 'pl';
         this.config.Labels = {
             confirmLabel: 'Ok'
         };
@@ -1870,32 +2129,15 @@ var AppComponent = /** @class */ (function () {
                 _this.dateInput.nativeElement.select();
             }
         });
-        this.subscription = this.calendarRange.openedChange.subscribe(function (val) {
-            if (!val) {
-                _this.dateRangeInput.nativeElement.click();
-                _this.dateRangeInput.nativeElement.select();
-            }
-        });
+        // this.subscription = this.calendarRange.openedChange.subscribe(val => {
+        //   if (!val) {
+        //     this.dateRangeInput.nativeElement.click();
+        //     this.dateRangeInput.nativeElement.select();
+        //   }
+        // });
     };
     AppComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
-    };
-    AppComponent.prototype.generateRandDates = function () {
-        this.randomDisabledDates = Array(3)
-            .fill(null)
-            .map(function () {
-            var rand = Math.random() * (15 - -15) + -15;
-            return moment__WEBPACK_IMPORTED_MODULE_1__(moment__WEBPACK_IMPORTED_MODULE_1__["now"]())
-                .startOf('day')
-                .add(rand, 'day')
-                .format('YYYY-MM-DD');
-        });
-        this.randomDisabledDates.push(moment__WEBPACK_IMPORTED_MODULE_1__(moment__WEBPACK_IMPORTED_MODULE_1__["now"]()).format('YYYY-MM-DD'));
-    };
-    AppComponent.prototype.setDisabledTimeRanges = function () {
-        this.config.addDisabledTimeRange('00:00', '07:59');
-        this.config.addDisabledTimeRange('14:00', '16:59');
-        this.config.addDisabledTimeRange('21:00', '23:59');
     };
     AppComponent.prototype.openCalendar = function () {
         this.CalendarOpened = !this.CalendarOpened;
@@ -2111,7 +2353,7 @@ var AppComponent = /** @class */ (function () {
         } if (rf & 2) {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](18);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("appendById", "test123")("opened", ctx.CalendarOpened)("config", ctx.config)("date", ctx.setDate);
-        } }, directives: [_projects_libusoftcicom_lc_datepicker_src_lib_lc_date_picker_component__WEBPACK_IMPORTED_MODULE_3__["LCDatePickerComponent"]], styles: ["code[_ngcontent-%COMP%] {\r\n  display: block;\r\n  white-space: pre-wrap;\r\n  font-size: 12px;\r\n  line-height: 1.4;\r\n}\r\n\r\n\r\nselect[_ngcontent-%COMP%], input[_ngcontent-%COMP%] {\r\n  font-size: 12px;\r\n}\r\n\r\n\r\n#installation[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\r\n  margin-bottom: 10px;\r\n}\r\n\r\n\r\n.calendar[_ngcontent-%COMP%] {\r\n    position: fixed !important;\r\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtFQUNFLGNBQWM7RUFDZCxxQkFBcUI7RUFDckIsZUFBZTtFQUNmLGdCQUFnQjtBQUNsQjs7O0FBR0E7O0VBRUUsZUFBZTtBQUNqQjs7O0FBRUE7RUFDRSxtQkFBbUI7QUFDckI7OztBQUNFO0lBQ0UsMEJBQTBCO0VBQzVCIiwiZmlsZSI6ImFwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbmNvZGUge1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG4gIHdoaXRlLXNwYWNlOiBwcmUtd3JhcDtcclxuICBmb250LXNpemU6IDEycHg7XHJcbiAgbGluZS1oZWlnaHQ6IDEuNDtcclxufVxyXG5cclxuXHJcbnNlbGVjdCxcclxuaW5wdXQge1xyXG4gIGZvbnQtc2l6ZTogMTJweDtcclxufVxyXG5cclxuI2luc3RhbGxhdGlvbiBsaSB7XHJcbiAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxufVxyXG4gIC5jYWxlbmRhciB7XHJcbiAgICBwb3NpdGlvbjogZml4ZWQgIWltcG9ydGFudDtcclxuICB9XHJcblxyXG4iXX0= */"] });
+        } }, directives: [_projects_libusoftcicom_lc_datepicker_src_lib_lc_date_picker_component__WEBPACK_IMPORTED_MODULE_3__["LCDatePickerComponent"]], styles: ["code[_ngcontent-%COMP%] {\r\n  display: block;\r\n  white-space: pre-wrap;\r\n  font-size: 12px;\r\n  line-height: 1.4;\r\n}\r\n\r\n\r\nselect[_ngcontent-%COMP%], input[_ngcontent-%COMP%] {\r\n  font-size: 12px;\r\n}\r\n\r\n\r\n#installation[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\r\n  margin-bottom: 10px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtFQUNFLGNBQWM7RUFDZCxxQkFBcUI7RUFDckIsZUFBZTtFQUNmLGdCQUFnQjtBQUNsQjs7O0FBR0E7O0VBRUUsZUFBZTtBQUNqQjs7O0FBRUE7RUFDRSxtQkFBbUI7QUFDckIiLCJmaWxlIjoiYXBwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuY29kZSB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgd2hpdGUtc3BhY2U6IHByZS13cmFwO1xyXG4gIGZvbnQtc2l6ZTogMTJweDtcclxuICBsaW5lLWhlaWdodDogMS40O1xyXG59XHJcblxyXG5cclxuc2VsZWN0LFxyXG5pbnB1dCB7XHJcbiAgZm9udC1zaXplOiAxMnB4O1xyXG59XHJcblxyXG4jaW5zdGFsbGF0aW9uIGxpIHtcclxuICBtYXJnaW4tYm90dG9tOiAxMHB4O1xyXG59XHJcblxyXG4iXX0= */"] });
     return AppComponent;
 }());
 
@@ -3258,13 +3500,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _year_picker_year_picker_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./year-picker/year-picker.component */ "lLSO");
 /* harmony import */ var _lc_date_picker_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lc-date-picker.component */ "GkkM");
 /* harmony import */ var _lc_date_range_picker_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lc-date-range-picker.component */ "tlUP");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./lc-date-picker-config-helper */ "LVSm");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ECalendarType", function() { return _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_9__["ECalendarType"]; });
+/* harmony import */ var _time_picker_seconds_compact_time_picker_seconds_compact_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./time-picker-seconds-compact/time-picker-seconds-compact.component */ "B8Ml");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./lc-date-picker-config-helper */ "LVSm");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ECalendarType", function() { return _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_10__["ECalendarType"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ECalendarNavigation", function() { return _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_9__["ECalendarNavigation"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ECalendarNavigation", function() { return _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_10__["ECalendarNavigation"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DatePickerConfig", function() { return _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_9__["DatePickerConfig"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DatePickerConfig", function() { return _lc_date_picker_config_helper__WEBPACK_IMPORTED_MODULE_10__["DatePickerConfig"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "panels", function() { return _lc_date_picker_component__WEBPACK_IMPORTED_MODULE_6__["panels"]; });
 
@@ -3283,22 +3526,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var LcDatePickerModule = /** @class */ (function () {
     function LcDatePickerModule() {
     }
     LcDatePickerModule.ɵfac = function LcDatePickerModule_Factory(t) { return new (t || LcDatePickerModule)(); };
-    LcDatePickerModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineNgModule"]({ type: LcDatePickerModule });
-    LcDatePickerModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineInjector"]({ imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"]]] });
+    LcDatePickerModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineNgModule"]({ type: LcDatePickerModule });
+    LcDatePickerModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineInjector"]({ imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"]]] });
     return LcDatePickerModule;
 }());
 
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵsetNgModuleScope"](LcDatePickerModule, { declarations: [_lc_date_picker_component__WEBPACK_IMPORTED_MODULE_6__["LCDatePickerComponent"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵsetNgModuleScope"](LcDatePickerModule, { declarations: [_lc_date_picker_component__WEBPACK_IMPORTED_MODULE_6__["LCDatePickerComponent"],
         _time_picker_time_picker_component__WEBPACK_IMPORTED_MODULE_1__["LCTimePickerComponent"],
         _time_picker_compact_time_picker_compact_component__WEBPACK_IMPORTED_MODULE_2__["LCTimePickerCompactComponent"],
         _day_picker_day_picker_component__WEBPACK_IMPORTED_MODULE_3__["LCDayPickerComponent"],
         _month_picker_month_picker_component__WEBPACK_IMPORTED_MODULE_4__["LCMonthPickerComponent"],
         _year_picker_year_picker_component__WEBPACK_IMPORTED_MODULE_5__["LCYearPickerComponent"],
-        _lc_date_range_picker_component__WEBPACK_IMPORTED_MODULE_7__["LCDateRangePickerComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"]], exports: [_lc_date_picker_component__WEBPACK_IMPORTED_MODULE_6__["LCDatePickerComponent"], _lc_date_range_picker_component__WEBPACK_IMPORTED_MODULE_7__["LCDateRangePickerComponent"]] }); })();
+        _lc_date_range_picker_component__WEBPACK_IMPORTED_MODULE_7__["LCDateRangePickerComponent"],
+        _time_picker_seconds_compact_time_picker_seconds_compact_component__WEBPACK_IMPORTED_MODULE_8__["LCTimePickerSecondsCompactComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"]], exports: [_lc_date_picker_component__WEBPACK_IMPORTED_MODULE_6__["LCDatePickerComponent"], _lc_date_range_picker_component__WEBPACK_IMPORTED_MODULE_7__["LCDateRangePickerComponent"]] }); })();
 
 
 

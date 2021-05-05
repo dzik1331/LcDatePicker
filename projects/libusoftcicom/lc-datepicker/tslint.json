@@ -12,6 +12,11 @@
       "element",
       "lib",
       "kebab-case"
-    ]
+    ],
+    "no-inferrable-types": false,
+    "prefer-const": false,
+    "no-angle-bracket-type-assertion": false,
+    "no-string-throw": false,
+    "no-redundant-jsdoc": false
   }
 }

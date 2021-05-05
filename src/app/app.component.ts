@@ -1,12 +1,7 @@
 import { Component, ViewChild, ElementRef, Renderer2, OnInit, OnDestroy } from '@angular/core';
-import {
-  DatePickerConfig,
-  ECalendarType,
-  LCDatePickerComponent,
-  IDisabledTimeRanges
-} from '@libusoftcicom/lc-datepicker';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
+import {DatePickerConfig, ECalendarType, LCDatePickerComponent} from '@libusoftcicom/lc-datepicker';
 
 @Component({
   selector: 'lc-app-root',
@@ -53,25 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private renderer: Renderer2) {
     const today = this.todayDateObject.toObject();
 
-    this.config.CalendarType = ECalendarType.Date;
-    this.config.Localization = 'hr';
-    this.config.MinDate = {
-      years: this.fromDateObject.years,
-      months: this.fromDateObject.months,
-      date: this.fromDateObject.date
-    };
-    this.config.MaxDate = {
-      years: this.toDateObject.years,
-      months: this.toDateObject.months,
-      date: this.toDateObject.date
-    };
-
-    this.generateRandDates();
-
-    // define range of unavailable dates
-    this.config.setDisabledDates(this.randomDisabledDates);
-    // define range of unavailable time
-    this.setDisabledTimeRanges();
+    this.config.CalendarType = ECalendarType.DateTimeSeconds;
+    this.config.Localization = 'pl';
 
     this.config.Labels = {
       confirmLabel: 'Ok'
@@ -90,38 +68,16 @@ export class AppComponent implements OnInit, OnDestroy {
         this.dateInput.nativeElement.select();
       }
     });
-    this.subscription = this.calendarRange.openedChange.subscribe(val => {
-      if (!val) {
-        this.dateRangeInput.nativeElement.click();
-        this.dateRangeInput.nativeElement.select();
-      }
-    });
+    // this.subscription = this.calendarRange.openedChange.subscribe(val => {
+    //   if (!val) {
+    //     this.dateRangeInput.nativeElement.click();
+    //     this.dateRangeInput.nativeElement.select();
+    //   }
+    // });
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  private generateRandDates() {
-    this.randomDisabledDates = Array(3)
-      .fill(null)
-      .map(() => {
-        const rand = Math.random() * (15 - -15) + -15;
-        return moment(moment.now())
-          .startOf('day')
-          .add(rand, 'day')
-          .format('YYYY-MM-DD');
-      });
-
-    this.randomDisabledDates.push(moment(moment.now()).format('YYYY-MM-DD'));
-  }
-
-  private setDisabledTimeRanges() {
-    this.config.addDisabledTimeRange('00:00', '07:59');
-
-    this.config.addDisabledTimeRange('14:00', '16:59');
-
-    this.config.addDisabledTimeRange('21:00', '23:59');
   }
 
   public openCalendar() {
