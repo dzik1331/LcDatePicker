@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 
 
 

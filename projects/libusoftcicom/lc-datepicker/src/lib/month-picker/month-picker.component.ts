@@ -10,7 +10,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { DatePickerConfig, ECalendarNavigation } from './../lc-date-picker-config-helper';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Subscription } from 'rxjs';
 
 export enum Panels {

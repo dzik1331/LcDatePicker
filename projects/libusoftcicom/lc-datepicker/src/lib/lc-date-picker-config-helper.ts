@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import {Subject, Observable} from 'rxjs';
 
 export enum ECalendarType {
