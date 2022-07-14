@@ -47,7 +47,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -71,8 +70,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "lc-date-picker:build",
-            "open": true,
-            "aot": true
+            "open": true
           },
           "configurations": {
             "production": {
@@ -103,18 +101,6 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         },
         "e2e": {
@@ -155,18 +141,6 @@
             "main": "projects/libusoftcicom/lc-datepicker/src/test.ts",
             "tsConfig": "projects/libusoftcicom/lc-datepicker/tsconfig.spec.json",
             "karmaConfig": "projects/libusoftcicom/lc-datepicker/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/libusoftcicom/lc-datepicker/tsconfig.lib.json",
-              "projects/libusoftcicom/lc-datepicker/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
